@@ -1,16 +1,19 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository;
 
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.CPF;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 
 @Repository
-public interface ClienteRepositoryMysql  {
+public interface ClienteRepositoryMysql  extends JpaRepository<ClienteEntity, String> {
 
-  //  List<ProdutoEntity> findByCPF(Categoria categoria);
+    Optional<ClienteEntity> findByCPF(CPF cpf);
 
-   // Optional<ClienteEntity> save(Cliente cliente);
+   Optional<ClienteEntity> save(Cliente cliente);
 
 }
