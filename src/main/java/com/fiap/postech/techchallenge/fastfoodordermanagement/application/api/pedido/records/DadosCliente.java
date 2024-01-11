@@ -5,6 +5,6 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entiti
 public record DadosCliente(String nome, String cpf, String email) {
 
   public DadosCliente(Cliente dadosCliente) {
-    this(dadosCliente.getNome(), dadosCliente.getCpf(), dadosCliente.getEmail().getEndereco());
+    this(dadosCliente.getNome(), dadosCliente.getCpf(), dadosCliente.getEmail());
   }
 }

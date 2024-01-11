@@ -7,7 +7,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.Ema
 public class  Cliente {
 
   private String nome;
-  private final CPF cpf;
+  private  CPF cpf;
   private Email email;
 
   public Cliente(String nome, CPF cpf, Email email) {
@@ -28,8 +28,8 @@ public class  Cliente {
     return cpf.getNumero();
   }
 
-  public Email getEmail() {
-    return email;
+  public String getEmail() {
+    return email.getEndereco();
   }
 
   public void setEmail(Email email){

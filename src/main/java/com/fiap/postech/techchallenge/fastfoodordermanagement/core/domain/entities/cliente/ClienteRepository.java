@@ -1,5 +1,7 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente;
 
+import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
+
 import java.util.List;
 
 public interface ClienteRepository {

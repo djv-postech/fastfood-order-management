@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ClienteRepositoryMysql  extends JpaRepository<ClienteEntity, String> {
 
-    Optional<ClienteEntity> findByCPF(CPF cpf);
+    Optional<ClienteEntity> findByCpf(String cpf);
 
-   Optional<ClienteEntity> save(Cliente cliente);
+  // Optional<ClienteEntity> save(ClienteEntity cliente);
 
 }
