@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record DadosCadastroProduto(
+
+        @NotBlank
+        Integer id,
         @NotBlank
         String nome,
 

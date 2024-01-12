@@ -14,6 +14,5 @@ public interface ClienteRepositoryMysql  extends JpaRepository<ClienteEntity, St
 
     Optional<ClienteEntity> findByCpf(String cpf);
 
-  // Optional<ClienteEntity> save(ClienteEntity cliente);
 
 }

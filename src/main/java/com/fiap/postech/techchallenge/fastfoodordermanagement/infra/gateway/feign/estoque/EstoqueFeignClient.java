@@ -1,17 +1,20 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.feign.estoque;
 
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosSubtracaoEstoqueProduto;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.cloud.openfeign.FeignClient;
 
+import java.util.List;
+
 @FeignClient(
         name = "estoque",
-        url = "${estoque.client.url}")
+        url = "${estoque.client.url}",
+        configuration = EstoqueClientConfig.class)
 public interface EstoqueFeignClient {
-    @PostMapping("/estoque/produto/{id}")
+    @PostMapping("/produto")
     void subtrairEstoque(
 
-            @PathVariable("id") String id,
-            @RequestParam("quantidade") Integer quantidade);
+           @RequestBody List<DadosSubtracaoEstoqueProduto> dadosSubtracaoEstoqueProduto);
 
     }
 

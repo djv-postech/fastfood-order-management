@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 
 public class Produto {
 
-    private String id;
+    private Integer id;
     private String nome;
     private String descricao;
     private BigDecimal preco;
     private Integer quantidade;
     private Categoria categoria;
 
-    public Produto(){
+    public Produto() {
 
     }
 
-    public Produto(String id, String nome, String descricao, BigDecimal preco, Integer quantidade, Categoria categoria) {
+    public Produto(Integer id, String nome, String descricao, BigDecimal preco, Integer quantidade, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -24,7 +24,8 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Produto(String nome, String descricao, Categoria categoria, BigDecimal preco, int quantidade) {
+    public Produto(Integer id, String nome, String descricao, Categoria categoria, BigDecimal preco, int quantidade) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.categoria = categoria;
@@ -33,11 +34,11 @@ public class Produto {
     }
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
@@ -69,7 +70,7 @@ public class Produto {
         this.preco = preco;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

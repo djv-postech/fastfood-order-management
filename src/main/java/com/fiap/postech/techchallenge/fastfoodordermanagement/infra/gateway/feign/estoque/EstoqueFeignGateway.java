@@ -1,7 +1,11 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.feign.estoque;
 
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosSubtracaoEstoqueProduto;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.feign.EstoqueGateway;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 
 @Service
 public class EstoqueFeignGateway implements EstoqueGateway {
@@ -18,8 +22,8 @@ public class EstoqueFeignGateway implements EstoqueGateway {
     }
 
     @Override
-    public void subtrairEstoque(String id, Integer quantidade) {
-        feignClient.subtrairEstoque(id, quantidade);
+    public void subtrairEstoque(List<DadosSubtracaoEstoqueProduto> dadosSubtracaoEstoqueProduto) {
+        feignClient.subtrairEstoque(dadosSubtracaoEstoqueProduto);
 
     }
 }

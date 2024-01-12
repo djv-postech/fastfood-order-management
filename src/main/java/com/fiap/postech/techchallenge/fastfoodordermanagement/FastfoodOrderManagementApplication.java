@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 
 @SpringBootApplication
-@ImportAutoConfiguration({FeignAutoConfiguration.class})
 public class FastfoodOrderManagementApplication {
 
 	public static void main(String[] args) {

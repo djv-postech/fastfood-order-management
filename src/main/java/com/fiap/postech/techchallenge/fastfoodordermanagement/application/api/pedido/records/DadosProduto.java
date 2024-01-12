@@ -5,7 +5,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entiti
 
 import java.math.BigDecimal;
 
-public record DadosProduto(String id, String nome, String descricao, BigDecimal preco, Categoria produtoCategoria,
+public record DadosProduto(Integer id, String nome, String descricao, BigDecimal preco, Categoria produtoCategoria,
                            Integer quantidade) {
 
     public DadosProduto(Produto dadosProduto) {

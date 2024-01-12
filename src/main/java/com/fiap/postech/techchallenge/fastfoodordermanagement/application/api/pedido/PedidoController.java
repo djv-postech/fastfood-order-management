@@ -45,19 +45,13 @@ public class PedidoController {
         cadastroDeCliente.cadastrar(dadosCadastroPedido.cliente().convertToCliente());
 
         // Chamada para debitar estoque
-        List<Produto> produtos = dadosCadastroPedido.convertToPedido().getProdutos();
-        subtracaoDeEstoque.subtrair(produtos);
-
-
-       //   Pedido pedido =
-        //         cadastroDePedido.cadastrarPedido(dadosCadastroPedido.convertToPedido());
+        subtracaoDeEstoque.subtrair(dadosCadastroPedido.convertToPedido().getProdutos());
 
         // Chama serviço de pagamento parar gerar QRCode, chama use case para atualizar servico
         //  final String qrCode = criacaoDePagamento.gerarQrCodeParaPagamento(pedidoCadastrado);
 
         // Envia pedido para fila rabbit (será consumida pelo serviço produção)
         criacaoDePedido.criar(dadosCadastroPedido);
-
 
         return ResponseEntity.ok().body(null);
     }

@@ -7,6 +7,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +21,16 @@ public class ClienteRespositoryImpl implements ClienteRepository {
 
     @Override
     public Cliente cadastrarCliente(Cliente cliente) {
-        ClienteEntity cli = ClienteEntity.from(cliente);
+
         return clienteConverter.from(clienteRepositoryMysql.save(ClienteEntity.from(cliente)));
     }
 
     @Override
     public Cliente identificaClientePorCpf(String cpf) {
-        return null;
+
+        Optional<ClienteEntity> clienteEntity = clienteRepositoryMysql.findByCpf(cpf);
+        return clienteEntity.map(clienteConverter::from).orElseThrow(
+                () -> new NotFoundException("Cliente de CPF: " + cpf + " não encontrado"));
     }
 
     @Override
