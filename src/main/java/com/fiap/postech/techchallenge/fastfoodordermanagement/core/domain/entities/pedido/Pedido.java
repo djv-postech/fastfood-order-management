@@ -20,6 +20,8 @@ public class Pedido {
 
   private Pagamento pagamento;
   private StatusPedido statusPedido;
+
+  private String qrCode;
   private final LocalDateTime dataCriacaoPedido;
 
   public Pedido(
@@ -29,6 +31,7 @@ public class Pedido {
       BigDecimal valorTotal,
       Pagamento pagamento,
       StatusPedido statusPedido,
+      String qrCode,
       LocalDateTime dataCriacaoPedido) {
     this.numeroPedido = numeroPedido;
     this.cliente = cliente;
@@ -36,7 +39,9 @@ public class Pedido {
     this.valorTotal = valorTotal;
     this.pagamento = pagamento;
     this.statusPedido = statusPedido;
+    this.qrCode = qrCode;
     this.dataCriacaoPedido = dataCriacaoPedido;
+
   }
 
   public Pedido(
@@ -82,6 +87,10 @@ public class Pedido {
     return dataCriacaoPedido;
   }
 
+  public String getQrCode() {
+    return qrCode;
+  }
+
   public void setPagamento(Pagamento pagamento) {
     this.pagamento = pagamento;
   }
@@ -89,4 +98,9 @@ public class Pedido {
   public void setStatus(StatusPedido statusPedido) {
     this.statusPedido = statusPedido;
   }
+
+  public void setQrCode(String qrCode) {
+    this.qrCode = qrCode;
+  }
+
 }

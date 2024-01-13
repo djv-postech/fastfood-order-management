@@ -1,6 +1,8 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.Pagamento;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.StatusPagamento;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.TipoPagamento;
@@ -12,6 +14,7 @@ public record DadosPagamento(
     String id,
     BigDecimal totalPagamento,
     TipoPagamento tipoPagamento,
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     LocalDateTime dataPagamento,
     StatusPagamento statusPagamento) {
 
