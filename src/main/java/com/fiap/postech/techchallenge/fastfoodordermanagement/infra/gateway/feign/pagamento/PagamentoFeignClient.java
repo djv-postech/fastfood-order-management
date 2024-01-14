@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface PagamentoFeignClient {
 
     @PostMapping()
-    ResponseEntity<String> gerarPagamento(@Valid @RequestBody DadosPedido dadosPedido);
+    String gerarPagamento(@Valid @RequestBody DadosPedido dadosPedido);
 
 }
 

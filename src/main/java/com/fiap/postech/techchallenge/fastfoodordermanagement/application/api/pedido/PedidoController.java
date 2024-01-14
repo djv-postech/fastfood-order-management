@@ -1,10 +1,9 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.StatusPagamento;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.CadastroDeCliente;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.CriacaoDePedido;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Pedidos", description = "Rest api para operações de pedidos")
 public class PedidoController {
 
-    private final CadastroDeCliente cadastroDeCliente;
+    private final RegistroDeCliente registroDeCliente;
 
     private final CriacaoDePedido criacaoDePedido;
 
@@ -32,8 +31,8 @@ public class PedidoController {
 
     private final GerarQrCode gerarQrCode;
 
-    public PedidoController(CadastroDeCliente cadastroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoque subtracaoDeEstoque, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode) {
-        this.cadastroDeCliente = cadastroDeCliente;
+    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoque subtracaoDeEstoque, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode) {
+        this.registroDeCliente = registroDeCliente;
         this.criacaoDePedido = criacaoDePedido;
         this.subtracaoDeEstoque = subtracaoDeEstoque;
         this.atualizacaoDePedido = atualizacaoDePedido;
@@ -45,16 +44,9 @@ public class PedidoController {
     public ResponseEntity<DadosPedido> cadastrarPedido(
             @Valid @RequestBody DadosPedido dadosPedido) {
 
-        //FIXME Endpoint deve receber um dadosCadastroPedido ou dadosPedido? Tem que retornar um dados
+        registroDeCliente.registrar(dadosPedido.cliente().convertToCliente());
 
-        //FIXME Tratar erros
-        // Criar use case para pedido
-
-        //Cadastra cliente
-        cadastroDeCliente.cadastrar(dadosPedido.cliente().convertToCliente());
-
-        // Chamada para debitar estoque
-        //      subtracaoDeEstoque.subtrair(dadosPedido.convertToPedido().getProdutos());
+        subtracaoDeEstoque.subtrair(dadosPedido.convertToPedido().getProdutos());
 
         // Chama serviço de pagamento parar gerar QRCode, chama use case para atualizar servico
         String qrCode = gerarQrCode.gerar(dadosPedido);
