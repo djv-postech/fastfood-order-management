@@ -1,15 +1,11 @@
 resources:
   - fastfood-order-management-secrets.yml
   - fastfood-order-management-sql-secrets.yml
-  - fastfood-order-rabbit-secrets.yml
   - fastfood-order-management-svc.yml
   - fastfood-order-management-sql-svc.yml
-  - fastfood-order-rabbit-svc.yml
   - fastfood-order-management-deployment.yml
   - fastfood-order-management-sql-statefulset.yml
-  - fastfood-order-rabbit-statefulset.yml
   - fastfood-order-management-deployment-vs.yml
   - fastfood-order-management-sql-statefulset-vs.yml
-  - fastfood-management-rabbit-statefulset-vs.yml
   - fastfood-management-system-gateway.yml
   - fastfood-management-system-gateway-vs.yml

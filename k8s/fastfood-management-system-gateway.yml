@@ -1,13 +1,13 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: fastfood-order-management-gateway
+  name: fastfood-system-management-gateway
 spec:
   selector:
     istio: ingressgateway
   servers:
     - port:
-        number: 8080
+        number: 80
         name: http
         protocol: HTTP
       hosts:

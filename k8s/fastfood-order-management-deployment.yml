@@ -37,6 +37,42 @@ spec:
                   name: fastfood-order-management-secret-opaque
                   key: MYSQL_PASSWORD
 
+            - name: RABBIT_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: RABBIT_HOST
+
+            - name: RABBIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: RABBIT_USERNAME
+
+            - name: RABBIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: RABBIT_PASSWORD
+
+            - name: PRODUCT_MANAGEMENT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: PRODUCT_MANAGEMENT_URL
+
+            - name: PRODUCTION_URL
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: PRODUCTION_URL
+
+            - name: PAYMENT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: PAYMENT_URL
+
 #            - name: MYSQL_DB
 #              valueFrom:
 #                secretKeyRef:
