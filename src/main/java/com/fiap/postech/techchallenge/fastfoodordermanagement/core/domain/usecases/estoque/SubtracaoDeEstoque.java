@@ -9,16 +9,13 @@ import java.util.stream.Collectors;
 
 public class SubtracaoDeEstoque {
 
-
     private final EstoqueGateway estoqueGateway;
-
 
     public SubtracaoDeEstoque(EstoqueGateway estoqueGateway) {
         this.estoqueGateway = estoqueGateway;
     }
 
     public void subtrair(List<Produto> produtos) {
-//FIXME: tratar exceções
         estoqueGateway.subtrairEstoque(produtos.stream().map(produto -> new DadosSubtracaoEstoqueProduto(produto.getId(), produto.getQuantidade())).collect(Collectors.toList()));
     }
 }

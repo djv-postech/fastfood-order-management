@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.Pagamento;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.StatusPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.produto.Produto;
@@ -19,75 +20,37 @@ import java.util.stream.Collectors;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static java.util.Objects.isNull;
 
-public record DadosPedido(
-    String id,
-    List<DadosProduto> produtos,
+public record DadosPedido(@JsonInclude(NON_NULL) String id, List<DadosProduto> produtos,
 
-    @JsonInclude(NON_NULL) DadosCliente cliente,
-    DadosPagamento pagamento,
-    StatusPedido status,
+                          @JsonInclude(NON_NULL) DadosCliente cliente, DadosPagamento pagamento, StatusPedido status,
 
-    @NotNull @JsonSerialize(using = LocalDateTimeSerializer.class)
-    LocalDateTime dataCriacaoPedido,
+                          @NotNull @JsonSerialize(using = LocalDateTimeSerializer.class) LocalDateTime dataCriacaoPedido,
 
-    @NotNull BigDecimal valorTotal,
+                          @NotNull BigDecimal valorTotal,
 
-    @JsonInclude(NON_NULL) String qrCode) {
+                          @JsonInclude(NON_NULL) String qrCode) {
 
-  public DadosPedido(Pedido pedido, String qrCode) {
-    this(
-        pedido.getNumeroPedido(),
-        pedido.getProdutos().stream().map(DadosProduto::new).collect(
-            Collectors.toList()),
-        isNull(pedido.getCliente())? null: new DadosCliente(pedido.getCliente()),
-        new DadosPagamento(pedido.getPagamento()),
-        pedido.getStatusPedido(),
-        pedido.getDataCriacaoPedido(),
-        pedido.getValorTotal(),
-             qrCode);
-  }
+    public DadosPedido(Pedido pedido, String qrCode) {
+        this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), qrCode);
+    }
 
-  public DadosPedido(Pedido pedido) {
-    this(
-        pedido.getNumeroPedido(),
-        pedido.getProdutos().stream().map(DadosProduto::new).collect(
-            Collectors.toList()),
-        isNull(pedido.getCliente())? null: new DadosCliente(pedido.getCliente()),
-        new DadosPagamento(pedido.getPagamento()),
-        pedido.getStatusPedido(),
-        pedido.getDataCriacaoPedido(),
-            pedido.getValorTotal(),
-            pedido.getQrCode());
-  }
+    public DadosPedido(Pedido pedido) {
+        this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), pedido.getQrCode());
+    }
 
-  public Pedido convertToPedido() {
-    return new Pedido(
-            new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())),
-            buildProdutos(produtos),
-            valorTotal,
-//            new Pagamento(
-//                    pagamento.dataPagamento(),
-//                    pagamento.statusPagamento(),
-//                    pagamento.tipoPagamento(),
-//                    pagamento.totalPagamento()),
-            null,
-            status,
-            dataCriacaoPedido);
-  }
+    public Pedido convertToPedido() {
+        return new Pedido(new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
+            isNull(pagamento) ? null : new Pagamento(
+                    pagamento.dataPagamento(),
+                    pagamento.statusPagamento(),
+                    pagamento.tipoPagamento(),
+                    pagamento.totalPagamento()),
+                 status, dataCriacaoPedido);
+    }
 
-  private List<Produto> buildProdutos(List<DadosProduto> cadastroProdutos) {
-    return cadastroProdutos.stream()
-            .map(
-                    cadastroProduto ->
-                            new Produto(
-                                    cadastroProduto.id(),
-                                    cadastroProduto.nome(),
-                                    cadastroProduto.descricao(),
-                                    cadastroProduto.categoria(),
-                                    cadastroProduto.preco(),
-                                    cadastroProduto.quantidade()))
-            .collect(Collectors.toList());
-  }
+    private List<Produto> buildProdutos(List<DadosProduto> cadastroProdutos) {
+        return cadastroProdutos.stream().map(cadastroProduto -> new Produto(cadastroProduto.id(), cadastroProduto.nome(), cadastroProduto.descricao(), cadastroProduto.categoria(), cadastroProduto.preco(), cadastroProduto.quantidade())).collect(Collectors.toList());
+    }
 
 
 }
