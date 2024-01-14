@@ -7,6 +7,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecas
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.GerarNumeroDoPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -31,12 +32,15 @@ public class PedidoController {
 
     private final GerarQrCode gerarQrCode;
 
-    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoque subtracaoDeEstoque, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode) {
+    private final GerarNumeroDoPedido gerarNumeroDoPedido;
+
+    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoque subtracaoDeEstoque, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode, GerarNumeroDoPedido gerarNumeroDoPedido) {
         this.registroDeCliente = registroDeCliente;
         this.criacaoDePedido = criacaoDePedido;
         this.subtracaoDeEstoque = subtracaoDeEstoque;
         this.atualizacaoDePedido = atualizacaoDePedido;
         this.gerarQrCode = gerarQrCode;
+        this.gerarNumeroDoPedido = gerarNumeroDoPedido;
     }
 
     @Operation(summary = "Checkout de Pedidos")
@@ -48,16 +52,17 @@ public class PedidoController {
 
         subtracaoDeEstoque.subtrair(dadosPedido.convertToPedido().getProdutos());
 
-        // Chama serviço de pagamento parar gerar QRCode, chama use case para atualizar servico
-        String qrCode = gerarQrCode.gerar(dadosPedido);
+        dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosPedido.convertToPedido()));
 
-        //Atualizar pedido
-        Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
+        String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
 
-        // Envia pedido para fila rabbit (será consumida pelo serviço produção)
-        criacaoDePedido.criar(new DadosPedido(pedido));
+        Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCodePagamento);
 
-        return ResponseEntity.ok().body(null);
+        dadosPedido = new DadosPedido(pedido);
+
+        criacaoDePedido.criar(dadosPedido);
+
+        return ResponseEntity.ok().body(dadosPedido);
     }
 
 }

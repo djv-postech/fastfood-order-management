@@ -103,4 +103,8 @@ public class Pedido {
     this.qrCode = qrCode;
   }
 
+  public void setNumeroPedido(String numeroPedido) {
+    this.numeroPedido = qrCode;
+  }
+
 }
