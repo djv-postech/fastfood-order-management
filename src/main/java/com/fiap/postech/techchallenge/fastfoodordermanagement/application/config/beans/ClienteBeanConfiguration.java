@@ -2,6 +2,7 @@ package com.fiap.postech.techchallenge.fastfoodordermanagement.application.confi
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.ClienteRepository;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.CadastroDeCliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,8 @@ public class ClienteBeanConfiguration {
     public  ClienteBeanConfiguration(ClienteRepository clienteRepository){
         this.clienteRepository = clienteRepository;
     }
+
+
 
     @Bean
     public CadastroDeCliente cadastroDeCliente(){
