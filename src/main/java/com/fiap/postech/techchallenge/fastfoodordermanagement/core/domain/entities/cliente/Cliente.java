@@ -1,13 +1,12 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente;
 
-
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.CPF;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.Email;
 
 public class  Cliente {
 
   private String nome;
-  private  CPF cpf;
+  private CPF cpf;
   private Email email;
 
   public Cliente(String nome, CPF cpf, Email email) {

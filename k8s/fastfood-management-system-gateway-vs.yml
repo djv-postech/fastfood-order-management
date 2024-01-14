@@ -1,0 +1,51 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: fastfood-order-management-gateway-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+    - fastfood-order-management-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: fastfood-order-management-service
+        port:
+          number: 8080
+  - match:
+      - uri:
+          prefix: "/produto/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: fastfood-product-management-service
+            port:
+              number: 8081
+  - match:
+      - uri:
+          prefix: "/producao/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: fastfood-production-service
+            port:
+              number: 8082
+
+  - match:
+      - uri:
+          prefix: "/pagamento/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: fastfood-payment-service
+            port:
+              number: 8083

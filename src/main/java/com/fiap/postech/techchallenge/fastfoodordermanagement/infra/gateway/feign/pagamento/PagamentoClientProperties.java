@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "pagamento.client")
+@ConfigurationProperties(prefix = "payment.client")
 public class PagamentoClientProperties {
     private int connectTimeout = 10000;
 

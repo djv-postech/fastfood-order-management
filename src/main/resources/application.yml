@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    drive-class-name: com.mysql.jdbc.Driver
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:}
+    url: jdbc:mysql://${MYSQL_HOST:localhost:3306}/customer_management_db
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+
+apis:
+  fastfood:
+    product-management:
+      client:
+        url: ${PRODUCT_MANAGEMENT_URL:localhost:8081}
+    production:
+      client:
+        url: ${PRODUCTION_URL:localhost:8082}
+    payment:
+      client:
+        url: ${PAYMENT_URL:localhost:8083}

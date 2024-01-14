@@ -7,10 +7,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import java.util.List;
 
 @FeignClient(
-        name = "estoque",
-        url = "${estoque.client.url}",
+        name = "product-management",
+        url = "${apis.fastfood.product.client.url}",
         configuration = EstoqueClientConfig.class)
 public interface EstoqueFeignClient {
+
     @PostMapping("/produto")
     void subtrairEstoque(
 

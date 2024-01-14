@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "estoque.client")
+@ConfigurationProperties(prefix = "product.client")
 public class EstoqueClientProperties {
   private int connectTimeout = 10000;
 

@@ -1,8 +1,6 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.feign.pagamento;
 
-import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosProduto;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.feign.PagamentoGateway;
 import org.springframework.stereotype.Service;
 
