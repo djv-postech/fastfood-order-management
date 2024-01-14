@@ -8,7 +8,7 @@ import java.util.List;
 
 @FeignClient(
         name = "product-management",
-        url = "${apis.fastfood.product.client.url}",
+        url = "${apis.fastfood.product-management.client.url}",
         configuration = EstoqueClientConfig.class)
 public interface EstoqueFeignClient {
 

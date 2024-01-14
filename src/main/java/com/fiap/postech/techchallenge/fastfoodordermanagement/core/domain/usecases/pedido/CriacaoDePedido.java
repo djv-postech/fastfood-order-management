@@ -1,4 +1,4 @@
-package com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente;
+package com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

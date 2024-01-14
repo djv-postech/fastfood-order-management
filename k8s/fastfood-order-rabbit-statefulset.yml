@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: fastfood-order-rabbit-statefulset
+  labels:
+    app: fastfood-order-rabbit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: fastfood-order-rabbit
+      labels:
+        app: fastfood-order-rabbit
+    spec:
+      containers:
+        - name: fastfood-order-rabbit-container
+          image: rabbitmq:latest
+          ports:
+            - containerPort: 5672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-rabbit-secret-opaque
+                  key: RABBITMQ_DEFAULT_USER
+
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-rabbit-secret-opaque
+                  key: RABBITMQ_DEFAULT_PASS
+
+  selector:
+    matchLabels:
+      app: fastfood-order-rabbit
+  serviceName: fastfood-order-rabbit-service

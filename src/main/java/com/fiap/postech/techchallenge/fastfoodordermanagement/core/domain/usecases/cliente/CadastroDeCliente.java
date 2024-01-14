@@ -10,8 +10,7 @@ public class CadastroDeCliente {
         this.clienteRepository = clienteRepository;
     }
 
-    public Cliente cadastrar(Cliente cliente) {
-        //FIXME: Antes de cadastrar, verificar se ja existe
-        return this.clienteRepository.cadastrarCliente(cliente);
+    public void cadastrar(Cliente cliente) {
+        clienteRepository.cadastrarCliente(cliente);
     }
 }

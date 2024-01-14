@@ -3,7 +3,6 @@ package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.gateway.fei
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface PagamentoFeignClient {
 
     @PostMapping()
-    ResponseEntity<String> gerarPagamento(@Valid @RequestBody DadosPedido dadosPedido);
+    String gerarPagamento(@Valid @RequestBody DadosPedido dadosPedido);
 
 }
 
