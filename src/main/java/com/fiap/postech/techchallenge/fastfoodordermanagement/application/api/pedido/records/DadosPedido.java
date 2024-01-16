@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static java.util.Objects.isNull;
 
-public record DadosPedido(@JsonInclude(NON_NULL) String id, List<DadosProduto> produtos,
+public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<DadosProduto> produtos,
 
                           @JsonInclude(NON_NULL) DadosCliente cliente, DadosPagamento pagamento, StatusPedido status,
 
