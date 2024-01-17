@@ -17,7 +17,7 @@ spec:
       containers:
         - name: fastfood-order-management-container
           image: soatpostech/fastfood-order-management:latest
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
