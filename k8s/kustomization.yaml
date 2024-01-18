@@ -5,7 +5,8 @@ resources:
   - fastfood-order-management-sql-svc.yml
   - fastfood-order-management-deployment.yml
   - fastfood-order-management-sql-statefulset.yml
-  - fastfood-order-management-deployment-vs.yml
-  - fastfood-order-management-sql-statefulset-vs.yml
-  - fastfood-management-system-gateway.yml
-  - fastfood-management-system-gateway-vs.yml
+  - discovery-server.yaml
+ # - fastfood-order-management-deployment-vs.yml
+  #- fastfood-order-management-sql-statefulset-vs.yml
+#  - fastfood-management-system-gateway.yml
+#  - fastfood-management-system-gateway-vs.yml

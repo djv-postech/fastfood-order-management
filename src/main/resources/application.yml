@@ -2,6 +2,18 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: fastfood-order-management-service
+  cloud:
+    kubernetes:
+      ribbon:
+        mode: SERVICE
+      discovery:
+        all-namespaces: true
+        discovery-server-url: ${DISCOVERY_SERVER:localhost}
+    config:
+      import-check:
+        enabled: false
   rabbitmq:
     host: ${RABBIT_HOST:localhost}
     port: 5672

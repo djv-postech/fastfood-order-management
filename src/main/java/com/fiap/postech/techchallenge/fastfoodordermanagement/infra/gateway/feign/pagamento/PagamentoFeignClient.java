@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
         configuration = PagamentoClientConfiguration.class)
 public interface PagamentoFeignClient {
 
-    @PostMapping()
+    @PostMapping("/pagamento")
     String gerarPagamento(@Valid @RequestBody DadosPedido dadosPedido);
 
 }

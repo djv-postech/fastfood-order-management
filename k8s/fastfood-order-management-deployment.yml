@@ -11,6 +11,8 @@ spec:
       name: fastfood-order-management
       labels:
         app: fastfood-order-management
+      annotations:
+        sidecar.istio.io/inject: "false"
     spec:
       containers:
         - name: fastfood-order-management-container
@@ -72,6 +74,12 @@ spec:
                 secretKeyRef:
                   name: fastfood-order-management-secret-opaque
                   key: PAYMENT_URL
+
+            - name: DISCOVERY_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-secret-opaque
+                  key: DISCOVERY_SERVER
 
 #            - name: MYSQL_DB
 #              valueFrom:

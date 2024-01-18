@@ -12,7 +12,7 @@ import java.util.List;
         configuration = EstoqueClientConfiguration.class)
 public interface EstoqueFeignClient {
 
-    @PostMapping("/produto")
+    @PostMapping("/estoque/produto")
     void subtrairEstoque(
 
            @RequestBody List<DadosSubtracaoEstoqueProduto> dadosSubtracaoEstoqueProduto);
