@@ -1,5 +1,6 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido;
 
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
@@ -46,13 +47,13 @@ public class PedidoController {
     @Operation(summary = "Checkout de Pedidos")
     @PostMapping
     public ResponseEntity<DadosPedido> cadastrarPedido(
-            @Valid @RequestBody DadosPedido dadosPedido) {
+            @Valid @RequestBody DadosCadastroPedido dadosCadastroPedido) {
 
-        registroDeCliente.registrar(dadosPedido.cliente().convertToCliente());
+        registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
 
-        subtracaoDeEstoque.subtrair(dadosPedido.convertToPedido().getProdutos());
+        subtracaoDeEstoque.subtrair(dadosCadastroPedido.convertToPedido().getProdutos());
 
-        dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosPedido.convertToPedido()));
+        DadosPedido dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosCadastroPedido.convertToPedido()));
 
         String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
 

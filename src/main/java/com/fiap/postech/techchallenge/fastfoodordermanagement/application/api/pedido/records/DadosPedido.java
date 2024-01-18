@@ -35,7 +35,7 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
     }
 
     public DadosPedido(Pedido pedido) {
-        this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), pedido.getQrCode());
+        this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), isNull(pedido.getPagamento()) ? null :  new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), pedido.getQrCode());
     }
 
     public Pedido convertToPedido() {

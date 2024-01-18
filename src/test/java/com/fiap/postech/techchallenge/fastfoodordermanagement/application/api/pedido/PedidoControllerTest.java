@@ -3,6 +3,7 @@ package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.p
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.PedidoHelper;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
@@ -59,6 +60,7 @@ public class PedidoControllerTest {
         // Dado
         String qrCode = "qrCode";
         DadosPedido dadosPedido = PedidoHelper.gerarDadosPedido();
+        DadosCadastroPedido dadosCadastroPedido = PedidoHelper.gerarDadosCadastroPedido();
         when(gerarNumeroDoPedido.gerar(any())).thenReturn(dadosPedido.convertToPedido());
         when(gerarQrCode.gerar(any())).thenReturn(qrCode);
         when(atualizacaoDePedido.atualizarPedido(any(), any())).thenReturn(dadosPedido.convertToPedido());
@@ -66,7 +68,7 @@ public class PedidoControllerTest {
         // Quando
         mockMvc.perform(post("/pedido")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(convertToJson(dadosPedido)))
+                        .content(convertToJson(dadosCadastroPedido)))
                 .andExpect(status().isOk());
 
         // Entao
