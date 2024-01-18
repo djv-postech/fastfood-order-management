@@ -9,7 +9,7 @@ import java.util.List;
 @FeignClient(
         name = "product-management",
         url = "${apis.fastfood.product-management.client.url}",
-        configuration = EstoqueClientConfig.class)
+        configuration = EstoqueClientConfiguration.class)
 public interface EstoqueFeignClient {
 
     @PostMapping("/produto")

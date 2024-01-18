@@ -56,27 +56,14 @@ public class Pagamento {
     return statusPagamento;
   }
 
-  public void setTotalPagamento(BigDecimal totalPagamento) {
-    this.totalPagamento = totalPagamento;
-  }
 
   public TipoPagamento getTipoPagamento() {
     return tipoPagamento;
   }
 
-  public void setTipoPagamento(TipoPagamento tipoPagamento) {
-    this.tipoPagamento = tipoPagamento;
-  }
 
   public LocalDateTime getDataEHorarioPagamento() {
     return dataEHorarioPagamento;
   }
 
-  public void setDataEHorarioPagamento(LocalDateTime dataEHorarioPagamento) {
-    this.dataEHorarioPagamento = dataEHorarioPagamento;
-  }
-
-  public void setStatusPagamento(StatusPagamento statusPagamento) {
-    this.statusPagamento = statusPagamento;
-  }
 }

@@ -17,12 +17,10 @@ public class EstoqueFeignGateway implements EstoqueGateway {
     private static final String REQUEST = ", Request: ";
     private static final String RESPONSE = ", Response: ";
 
-
-    public EstoqueFeignGateway(
-            EstoqueFeignClient feignClient
-    ) {
+    public EstoqueFeignGateway(EstoqueFeignClient feignClient) {
         this.feignClient = feignClient;
     }
+
 
     @Override
     public void subtrairEstoque(List<DadosSubtracaoEstoqueProduto> dadosSubtracaoEstoqueProduto) {

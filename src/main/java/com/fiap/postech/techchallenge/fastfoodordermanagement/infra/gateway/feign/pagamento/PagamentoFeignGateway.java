@@ -13,6 +13,7 @@ public class PagamentoFeignGateway implements PagamentoGateway {
         this.feignClient = feignClient;
     }
 
+
     @Override
     public String gerarQrCode(DadosPedido dadosPedido) {
         return feignClient.gerarPagamento(dadosPedido);

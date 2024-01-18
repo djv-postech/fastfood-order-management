@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.webjars.NotFoundException;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -20,9 +19,9 @@ public class ClienteRespositoryImpl implements ClienteRepository {
     private final ClienteConverter clienteConverter;
 
     @Override
-    public Cliente cadastrarCliente(Cliente cliente) {
+    public void cadastrarCliente(Cliente cliente) {
 
-        return clienteConverter.from(clienteRepositoryMysql.save(ClienteEntity.from(cliente)));
+        clienteConverter.from(clienteRepositoryMysql.save(ClienteEntity.from(cliente)));
     }
 
     @Override
@@ -33,18 +32,4 @@ public class ClienteRespositoryImpl implements ClienteRepository {
                 () -> new NotFoundException("Cliente de CPF: " + cpf + " não encontrado"));
     }
 
-    @Override
-    public Cliente atualizarCliente(Cliente cliente) {
-        return null;
-    }
-
-    @Override
-    public List<Cliente> listarClientes() {
-        return null;
-    }
-
-    @Override
-    public void excluirClientePorCpf(String cpf) {
-
-    }
 }

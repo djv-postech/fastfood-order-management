@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class EstoqueClientConfig {
+public class EstoqueClientConfiguration {
   private final EstoqueClientProperties properties;
 
   @Bean("estoqueClient")

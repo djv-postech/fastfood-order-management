@@ -37,14 +37,6 @@ public class ClienteEntity {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
-    }
-
     public static ClienteEntity from(Cliente cliente) {
         return new ClienteEntity(cliente.getNome(),
                 cliente.getCpf(),
