@@ -34,6 +34,7 @@ jobs:
   
   Sonar-Analisys:
     name: Sonar Analize
+    needs: Unit-Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
