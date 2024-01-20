@@ -17,7 +17,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - run: cd fastfood-order-management && mvn clean package
+    - run: mvn clean package
 
     - name: Generate JaCoCo Badge
       id: jacoco
@@ -54,10 +54,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build Project and Generate Docker Image
-      run: cd fastfood-order-management && mvn clean install -DskipTests --file pom.xml
+      run: mvn clean install -DskipTests --file pom.xml
    
     - name: Push Image to DockerHub
-      run: cd fastfood-order-management && mvn dockerfile:push
+      run: mvn dockerfile:push
 
   
   # Deploy_EKS:
