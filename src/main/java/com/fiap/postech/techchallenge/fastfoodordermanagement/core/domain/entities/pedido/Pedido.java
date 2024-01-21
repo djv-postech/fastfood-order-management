@@ -95,10 +95,6 @@ public class Pedido {
     this.pagamento = pagamento;
   }
 
-  public void setStatus(StatusPedido statusPedido) {
-    this.statusPedido = statusPedido;
-  }
-
   public void setQrCode(String qrCode) {
     this.qrCode = qrCode;
   }

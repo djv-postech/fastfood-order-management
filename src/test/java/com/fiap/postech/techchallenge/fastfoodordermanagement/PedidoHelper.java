@@ -24,4 +24,12 @@ public class PedidoHelper {
         return new DadosCadastroPedido(List.of(ProdutoHelper.gerarDadosProduto()), new DadosCliente("Cliente", "123.456.789-01", "email@email.com"), StatusPedido.RECEBIDO, LocalDateTime.now(), BigDecimal.valueOf(10));
     }
 
+    public static DadosCadastroPedido gerarDadosCadastroPedidoComCPFClienteInvalido() {
+        return new DadosCadastroPedido(List.of(ProdutoHelper.gerarDadosProduto()), new DadosCliente("Cliente", "123.456.789-1", "email@email.com"), StatusPedido.RECEBIDO, LocalDateTime.now(), BigDecimal.valueOf(10));
+    }
+
+    public static DadosCadastroPedido gerarDadosCadastroPedidoComEmailClienteInvalido() {
+        return new DadosCadastroPedido(List.of(ProdutoHelper.gerarDadosProduto()), new DadosCliente("Cliente", "123.456.789-09", "emailemail.com"), StatusPedido.RECEBIDO, LocalDateTime.now(), BigDecimal.valueOf(10));
+    }
+
 }

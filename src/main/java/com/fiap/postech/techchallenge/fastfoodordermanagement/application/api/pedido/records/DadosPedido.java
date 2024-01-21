@@ -30,10 +30,6 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
 
                           @JsonInclude(NON_NULL) String qrCode) {
 
-    public DadosPedido(Pedido pedido, String qrCode) {
-        this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), qrCode);
-    }
-
     public DadosPedido(Pedido pedido) {
         this(pedido.getNumeroPedido(), pedido.getProdutos().stream().map(DadosProduto::new).collect(Collectors.toList()), isNull(pedido.getCliente()) ? null : new DadosCliente(pedido.getCliente()), isNull(pedido.getPagamento()) ? null :  new DadosPagamento(pedido.getPagamento()), pedido.getStatusPedido(), pedido.getDataCriacaoPedido(), pedido.getValorTotal(), pedido.getQrCode());
     }

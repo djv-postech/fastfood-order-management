@@ -11,6 +11,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecas
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.GerarNumeroDoPedido;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -75,6 +76,38 @@ public class PedidoControllerTest {
         verify(criacaoDePedido, times(1))
                 .criar(any(DadosPedido.class));
 
+    }
+
+    @DisplayName("Test - Deve retornar bad request quando CPF do cliente é inválido")
+    @Test
+    public void deveRetornarBadRequestQuandoCPFClienteEInvalido() throws Exception {
+        // Dado
+        DadosCadastroPedido dadosCadastroPedido = PedidoHelper.gerarDadosCadastroPedidoComCPFClienteInvalido();
+
+        // Quando
+        //Então
+        Assertions
+                .assertThatThrownBy(
+                        () -> mockMvc.perform(post("/pedido")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convertToJson(dadosCadastroPedido))).andExpect(status().isInternalServerError()))
+                .hasCauseInstanceOf(RuntimeException.class).hasMessageContaining("CPF inválido");
+    }
+
+    @DisplayName("Test - Deve retornar bad request quando email do cliente é inválido")
+    @Test
+    public void deveRetornarBadRequestQuandoEmailDoClienteEInvalido() throws Exception {
+        // Dado
+        DadosCadastroPedido dadosCadastroPedido = PedidoHelper.gerarDadosCadastroPedidoComEmailClienteInvalido();
+
+        // Quando
+        //Então
+        Assertions
+                .assertThatThrownBy(
+                        () -> mockMvc.perform(post("/pedido")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convertToJson(dadosCadastroPedido))).andExpect(status().isInternalServerError()))
+                .hasCauseInstanceOf(RuntimeException.class).hasMessageContaining("Email inválido");
     }
 
     public static String convertToJson(Object object) throws JsonProcessingException {

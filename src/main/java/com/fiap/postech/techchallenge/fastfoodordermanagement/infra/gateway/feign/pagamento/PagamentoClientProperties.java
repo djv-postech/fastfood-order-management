@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Getter
-@Setter
 @Component
 @ConfigurationProperties(prefix = "apis.fastfood.payment.client")
 public class PagamentoClientProperties {

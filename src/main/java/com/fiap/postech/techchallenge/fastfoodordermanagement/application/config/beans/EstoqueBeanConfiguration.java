@@ -19,6 +19,4 @@ public class EstoqueBeanConfiguration {
         return new SubtracaoDeEstoque(estoqueGateway);
     }
 
-
-
 }

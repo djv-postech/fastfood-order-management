@@ -11,10 +11,6 @@ public class Produto {
     private Integer quantidade;
     private Categoria categoria;
 
-    public Produto() {
-
-    }
-
     public Produto(Integer id, String nome, String descricao, BigDecimal preco, Integer quantidade, Categoria categoria) {
         this.id = id;
         this.nome = nome;

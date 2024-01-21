@@ -55,12 +55,14 @@ public class EstoqueFeignGatewayTest {
         // Dado
         List<DadosSubtracaoEstoqueProduto> dadosSubtracaoEstoqueProduto = List.of(ProdutoHelper.gerarDadosSubtracaoEstoqueProduto());
         Map<String, Collection<String>> headers = new HashMap<>();
+
         doThrow(FeignException.errorStatus("any", Response.builder()
                 .status(500)
                 .request(Request.create(Request.HttpMethod.POST, "url", headers, "".getBytes(), StandardCharsets.UTF_8))
                 .build()))
                 .when(feignClient)
                 .subtrairEstoque(dadosSubtracaoEstoqueProduto);
+
 
         // Quando
         // Entao
