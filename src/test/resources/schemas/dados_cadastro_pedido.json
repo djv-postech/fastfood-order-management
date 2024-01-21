@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "produtos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "descricao",
+          "preco",
+          "categoria",
+          "quantidade"
+        ]
+      }
+    },
+    "cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nome",
+        "cpf",
+        "email"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "dataCriacaoPedido": {
+      "type": "string"
+    },
+    "valorTotal": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "produtos",
+    "cliente",
+    "status",
+    "dataCriacaoPedido",
+    "valorTotal"
+  ]
+}
