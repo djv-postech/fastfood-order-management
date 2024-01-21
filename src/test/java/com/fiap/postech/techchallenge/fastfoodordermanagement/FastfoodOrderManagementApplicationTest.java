@@ -9,5 +9,5 @@ class FastfoodOrderManagementApplicationTest {
     @Test
     void contextLoads() {
     }
-    
+
 }
