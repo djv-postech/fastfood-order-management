@@ -110,6 +110,24 @@ public class PedidoControllerTest {
                 .hasCauseInstanceOf(RuntimeException.class).hasMessageContaining("Email inválido");
     }
 
+    @DisplayName("Test - Deve retornar bad request quando email do cliente é nulo")
+    @Test
+    public void deveRetornarBadRequestQuandoEmailDoClienteENulo() throws Exception {
+        // Dado
+        DadosCadastroPedido dadosCadastroPedido = PedidoHelper.gerarDadosCadastroPedidoComEmailClienteNulo();
+
+        // Quando
+        //Então
+        Assertions
+                .assertThatThrownBy(
+                        () -> mockMvc.perform(post("/pedido")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convertToJson(dadosCadastroPedido))).andExpect(status().isInternalServerError()))
+                .hasCauseInstanceOf(RuntimeException.class).hasMessageContaining("Email inválido");
+    }
+
+
+
     public static String convertToJson(Object object) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(object);
     }

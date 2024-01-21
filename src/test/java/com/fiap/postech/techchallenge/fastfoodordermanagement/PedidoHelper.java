@@ -32,4 +32,8 @@ public class PedidoHelper {
         return new DadosCadastroPedido(List.of(ProdutoHelper.gerarDadosProduto()), new DadosCliente("Cliente", "123.456.789-09", "emailemail.com"), StatusPedido.RECEBIDO, LocalDateTime.now(), BigDecimal.valueOf(10));
     }
 
+    public static DadosCadastroPedido gerarDadosCadastroPedidoComEmailClienteNulo() {
+        return new DadosCadastroPedido(List.of(ProdutoHelper.gerarDadosProduto()), new DadosCliente("Cliente", "123.456.789-09", null), StatusPedido.RECEBIDO, LocalDateTime.now(), BigDecimal.valueOf(10));
+    }
+
 }
