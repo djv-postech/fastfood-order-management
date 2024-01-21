@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "numeroPedido": {
+      "type": "string"
+    },
+    "produtos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "descricao",
+          "preco",
+          "categoria",
+          "quantidade"
+        ]
+      }
+    },
+    "cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nome",
+        "cpf",
+        "email"
+      ]
+    },
+    "pagamento": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "totalPagamento": {
+          "type": "number"
+        },
+        "tipoPagamento": {
+          "type": "string"
+        },
+        "dataPagamento": {
+          "type": "string"
+        },
+        "statusPagamento": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "totalPagamento",
+        "tipoPagamento",
+        "dataPagamento",
+        "statusPagamento"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "dataCriacaoPedido": {
+      "type": "string"
+    },
+    "valorTotal": {
+      "type": "number"
+    },
+    "qrCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "numeroPedido",
+    "produtos",
+    "cliente",
+    "pagamento",
+    "status",
+    "dataCriacaoPedido",
+    "valorTotal",
+    "qrCode"
+  ]
+}
