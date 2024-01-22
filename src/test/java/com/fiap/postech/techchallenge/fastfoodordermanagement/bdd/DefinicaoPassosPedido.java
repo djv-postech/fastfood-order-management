@@ -1,6 +1,7 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.bdd;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.PedidoHelper;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.config.ApiError;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosProduto;
@@ -17,7 +18,7 @@ public class DefinicaoPassosPedido {
 
     private Response response;
     private final String BASE_URL = "http://localhost:8080";
-    private final String ENDPOINT_API_PEDIDO = BASE_URL + "/produto";
+    private final String ENDPOINT_API_PEDIDO = BASE_URL + "/pedido";
 
     @Quando("cadastrar um novo pedido")
     public DadosPedido pedido() {
@@ -36,7 +37,7 @@ public class DefinicaoPassosPedido {
     @Entao("o pedido é criado e enviado com sucesso")
     public void o_pedido_é_cadastrado_com_sucesso() {
         response.then()
-                .statusCode(HttpStatus.CREATED.value());
+                .statusCode(HttpStatus.OK.value());
     }
 
     @Entao("deve ser apresentado")
@@ -49,7 +50,7 @@ public class DefinicaoPassosPedido {
     // outro
 
     @Quando("receber um pedido com dados de cliente inválidos")
-    public DadosPedido receber_pedido_com_dados_de_cliente_invalido() {
+    public ApiError receber_pedido_com_dados_de_cliente_invalido() {
 
         DadosCadastroPedido dadosCadastroPedidoDadosInvalidos = PedidoHelper.gerarDadosCadastroPedidoComEmailClienteNulo();
 
@@ -59,13 +60,13 @@ public class DefinicaoPassosPedido {
                 .when()
                 .post(ENDPOINT_API_PEDIDO);
 
-        return response.then().extract().as(DadosPedido.class);
+        return response.then().extract().as(ApiError.class);
     }
 
     @Entao("uma mensagem de erro deve ser apresentada")
     public void uma_mensagem_de_erro_deve_ser_apresentada() {
         response.then()
-                .statusCode(HttpStatus.NOT_FOUND.value())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body(matchesJsonSchemaInClasspath("schemas/erro.schema.json"));
     }
 

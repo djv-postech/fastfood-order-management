@@ -13,7 +13,7 @@ public class ProdutoHelper {
 
 
     public static DadosProduto gerarDadosProduto() {
-        return new DadosProduto(1, "Hamburguer", "Descricao Big Mac", new BigDecimal(10), Categoria.LANCHE, 50);
+        return new DadosProduto(1, "Hamburguer", "Descricao Big Mac", new BigDecimal(10), Categoria.LANCHE, 1);
     }
 
     public static Produto gerarProduto() {
