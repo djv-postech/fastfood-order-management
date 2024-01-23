@@ -45,3 +45,22 @@ Exemplo Payload :
 #### **Fluxo Criação Pedido**
 
 ![Fluxo criacao de pedido](imagens/fluxo-criacao-de-pedido.png)
+
+<br>
+
+### [Tecnologias](#Tecnologias)
+***
+* Java
+* Spring Boot
+* Swagger
+* MySQL
+* RabbitMQ
+* Docker
+* Kubernetes
+
+<br>
+
+### [Grupo 7](#grupo-7)
+***
+* Jackson Carlos Leite Ramalho
+* Valqueline Nicácio da Silva
