@@ -45,12 +45,14 @@ public class Pedido {
   }
 
   public Pedido(
+        String numeroPedido,
       Cliente cliente,
       List<Produto> produtos,
       BigDecimal valorTotal,
       Pagamento pagamento,
       StatusPedido statusPedido,
       LocalDateTime dataCriacaoPedido) {
+    this.numeroPedido = numeroPedido;
     this.cliente = cliente;
     this.produtos = produtos;
     this.valorTotal = valorTotal;

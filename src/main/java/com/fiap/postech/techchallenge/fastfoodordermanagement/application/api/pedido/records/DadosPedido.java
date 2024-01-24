@@ -35,7 +35,7 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
     }
 
     public Pedido convertToPedido() {
-        return new Pedido(new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
+        return new Pedido(numeroPedido, new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
             isNull(pagamento) ? null : new Pagamento(
                     pagamento.dataPagamento(),
                     pagamento.statusPagamento(),
