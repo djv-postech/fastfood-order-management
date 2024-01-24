@@ -8,8 +8,10 @@ Serviço responsável pelo gerenciamento de pedidos do sistema fastfood:
 - Envio de dados do pedido (via Rabbit)
 <br>
 <br>
-***
+
 ### [Api Pedido](#Api_Pedido)
+
+***
 
 #### **Pedido**
 - Cadastro de novos pedidos
