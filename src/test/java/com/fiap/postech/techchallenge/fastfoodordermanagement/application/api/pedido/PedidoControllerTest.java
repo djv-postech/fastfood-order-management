@@ -7,6 +7,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pe
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
@@ -36,7 +37,7 @@ public class PedidoControllerTest {
     private CriacaoDePedido criacaoDePedido;
 
     @Mock
-    private SubtracaoDeEstoque subtracaoDeEstoque;
+    private SubtracaoDeEstoqueMessageService subtracaoDeEstoque;
 
     @Mock
     private AtualizacaoDePedido atualizacaoDePedido;

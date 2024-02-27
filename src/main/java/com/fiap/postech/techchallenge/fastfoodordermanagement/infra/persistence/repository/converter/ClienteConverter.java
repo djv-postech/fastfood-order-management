@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 public class ClienteConverter {
 
     public Cliente from(ClienteEntity clienteEntity){
-        return new Cliente( clienteEntity.getNome(), new CPF(clienteEntity.getCpf()), new Email(clienteEntity.getEmail()));
+        return new Cliente(clienteEntity.getNome(), new CPF(clienteEntity.getCpf()), new Email(clienteEntity.getEmail()));
     }
 }

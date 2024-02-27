@@ -1,8 +1,7 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.config.beans;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.ClienteRepository;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.CadastroDeCliente;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,31 +14,24 @@ public class ClienteBeanConfiguration {
         this.clienteRepository = clienteRepository;
     }
 
-
-
     @Bean
     public CadastroDeCliente cadastroDeCliente(){
         return new CadastroDeCliente(clienteRepository);
     }
-//
-//    @Bean
-//    public ListagemDeCliente listagemDeClientes(){
-//        return new ListagemDeCliente(clienteRepository);
-//    }
-//
-//    @Bean
-//    public IdentificacaoDeCliente identificacaoDeCliente(){
-//        return new IdentificacaoDeCliente(clienteRepository);
-//    }
-//
-//    @Bean
-//    public AtualizacaoDeCliente AtualizacaoDeCliente(){
-//        return new AtualizacaoDeCliente(clienteRepository);
-//    }
-//
-//    @Bean
-//    public ExclusaoDeCliente exclusaoDeClientes(){
-//        return new ExclusaoDeCliente(clienteRepository);
-//    }
+
+    @Bean
+    public ListagemDeCliente listagemDeClientes(){
+        return new ListagemDeCliente(clienteRepository);
+    }
+
+    @Bean
+    public IdentificacaoDeCliente identificacaoDeCliente(){
+        return new IdentificacaoDeCliente(clienteRepository);
+    }
+
+    @Bean
+    public ExclusaoDeCliente exclusaoDeClientes(){
+        return new ExclusaoDeCliente(clienteRepository);
+    }
 
 }

@@ -1,19 +1,18 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ClienteEntity {
 
-
-    private String nome;
-
     @Id
     private  String cpf;
 
+    private String nome;
+
     private String email;
+
 
     public ClienteEntity(String nome, String cpf, String email) {
         this.nome = nome;
@@ -37,9 +36,8 @@ public class ClienteEntity {
         return nome;
     }
 
+
     public static ClienteEntity from(Cliente cliente) {
-        return new ClienteEntity(cliente.getNome(),
-                cliente.getCpf(),
-                cliente.getEmail());
+        return new ClienteEntity(cliente.getNome(), cliente.getCpf(), cliente.getEmail());
     }
 }

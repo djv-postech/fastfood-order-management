@@ -16,6 +16,10 @@ public class ProducaoAMQPConfiguration {
     public static final String PEDIDO_PRODUCAO_COZINHA_QUEUE = "queue.pedido_producao_cozinha";
     public static final String PEDIDO_PRODUCAO_DLX = "dlx.pedido_producao";
     public static final String PEDIDO_PRODUCAO_COZINHA_DLQ = "dlq.pedido_producao_cozinha";
+    public static final String PRODUTO_ESTOQUE_EX = "ex.produto_estoque";
+    public static final String PRODUTO_ESTOQUE_SUBTRACAO_QUEUE = "queue.produto_estoque_subtracao";
+    public static final String PRODUTO_ESTOQUE_DLX = "dlx.produto_estoque";
+    public static final String PRODUTO_ESTOQUE_SUBTRACAO_DLQ = "dlq.produto_estoque_subtracao";
 
 
     @Bean
@@ -50,8 +54,20 @@ public class ProducaoAMQPConfiguration {
     }
 
     @Bean
+    public Queue produtoEstoqueSubtracaoQueue(){
+        return QueueBuilder.nonDurable(PRODUTO_ESTOQUE_SUBTRACAO_QUEUE)
+                .deadLetterExchange(PRODUTO_ESTOQUE_DLX)
+                .build();
+    }
+
+    @Bean
     public FanoutExchange pedidoProducaoExchange(){
         return new FanoutExchange(PEDIDO_PRODUCAO_EX);
+    }
+
+    @Bean
+    public FanoutExchange produtoEstoqueExchange(){
+        return new FanoutExchange(PRODUTO_ESTOQUE_EX);
     }
 
     @Bean
@@ -61,8 +77,19 @@ public class ProducaoAMQPConfiguration {
     }
 
     @Bean
+    public Binding produtoEstoqueBinding(){
+        return BindingBuilder.bind(produtoEstoqueSubtracaoQueue()).to(produtoEstoqueExchange());
+
+    }
+
+    @Bean
     public FanoutExchange pedidoProducaoDLX(){
         return new FanoutExchange(PEDIDO_PRODUCAO_DLX);
+    }
+
+    @Bean
+    public FanoutExchange produtoEstoqueDLX(){
+        return new FanoutExchange(PRODUTO_ESTOQUE_DLX);
     }
 
     @Bean
@@ -72,8 +99,20 @@ public class ProducaoAMQPConfiguration {
     }
 
     @Bean
+    public Queue produtoEstoqueSubtracaoDLQ(){
+        return QueueBuilder.nonDurable(PRODUTO_ESTOQUE_SUBTRACAO_DLQ)
+                .build();
+    }
+
+    @Bean
     public Binding pedidoProducaoDLXDLQBinding(){
         return BindingBuilder.bind(pedidoProducaoCozinhaDLQ()).to(pedidoProducaoDLX());
+
+    }
+
+    @Bean
+    public Binding produtoEstoqueDLXDLQBinding(){
+        return BindingBuilder.bind(produtoEstoqueSubtracaoDLQ()).to(produtoEstoqueDLX());
 
     }
 }

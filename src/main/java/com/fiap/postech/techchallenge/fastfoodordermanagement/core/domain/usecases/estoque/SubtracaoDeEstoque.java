@@ -18,4 +18,5 @@ public class SubtracaoDeEstoque {
     public void subtrair(List<Produto> produtos) {
         estoqueGateway.subtrairEstoque(produtos.stream().map(produto -> new DadosSubtracaoEstoqueProduto(produto.getId(), produto.getQuantidade())).collect(Collectors.toList()));
     }
+
 }

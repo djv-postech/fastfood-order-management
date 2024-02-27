@@ -4,6 +4,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pe
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
@@ -27,7 +28,7 @@ public class PedidoController {
 
     private final CriacaoDePedido criacaoDePedido;
 
-    private final SubtracaoDeEstoque subtracaoDeEstoque;
+    private final SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService;
 
     private final AtualizacaoDePedido atualizacaoDePedido;
 
@@ -35,10 +36,10 @@ public class PedidoController {
 
     private final GerarNumeroDoPedido gerarNumeroDoPedido;
 
-    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoque subtracaoDeEstoque, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode, GerarNumeroDoPedido gerarNumeroDoPedido) {
+    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode, GerarNumeroDoPedido gerarNumeroDoPedido) {
         this.registroDeCliente = registroDeCliente;
         this.criacaoDePedido = criacaoDePedido;
-        this.subtracaoDeEstoque = subtracaoDeEstoque;
+        this.subtracaoDeEstoqueMessageService = subtracaoDeEstoqueMessageService;
         this.atualizacaoDePedido = atualizacaoDePedido;
         this.gerarQrCode = gerarQrCode;
         this.gerarNumeroDoPedido = gerarNumeroDoPedido;
@@ -51,17 +52,17 @@ public class PedidoController {
 
         registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
 
-        subtracaoDeEstoque.subtrair(dadosCadastroPedido.convertToPedido().getProdutos());
+        subtracaoDeEstoqueMessageService.subtrairEstoque(dadosCadastroPedido.convertToPedido().getProdutos());
 
         DadosPedido dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosCadastroPedido.convertToPedido()));
 
-        String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
+        //String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
 
-        Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCodePagamento);
+        //Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCodePagamento);
 
-        dadosPedido = new DadosPedido(pedido);
+        //dadosPedido = new DadosPedido(pedido);
 
-        criacaoDePedido.criar(dadosPedido);
+        //criacaoDePedido.criar(dadosPedido);
 
         return ResponseEntity.ok().body(dadosPedido);
     }

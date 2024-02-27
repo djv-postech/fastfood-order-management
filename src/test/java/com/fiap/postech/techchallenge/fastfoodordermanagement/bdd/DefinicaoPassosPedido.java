@@ -4,7 +4,6 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.PedidoHelper;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.config.ApiError;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosProduto;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
 import io.restassured.response.Response;
@@ -46,8 +45,6 @@ public class DefinicaoPassosPedido {
                 .body(matchesJsonSchemaInClasspath("schemas/dados_pedido.schema.json"));
     }
 
-
-    // outro
 
     @Quando("receber um pedido com dados de cliente inválidos")
     public ApiError receber_pedido_com_dados_de_cliente_invalido() {

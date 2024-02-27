@@ -27,4 +27,7 @@ public class  Cliente {
     return email.getEndereco();
   }
 
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 }
