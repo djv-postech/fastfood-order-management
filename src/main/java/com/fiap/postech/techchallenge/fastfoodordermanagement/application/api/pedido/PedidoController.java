@@ -46,21 +46,24 @@ public class PedidoController {
 
     @Operation(summary = "Checkout de Pedidos")
     @PostMapping
-    public ResponseEntity<DadosPedido> cadastrarPedido(
-            @Valid @RequestBody DadosCadastroPedido dadosCadastroPedido) {
+    public ResponseEntity<DadosPedido> cadastrarPedido(@Valid @RequestBody DadosCadastroPedido dadosCadastroPedido) {
 
         registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
 
         subtracaoDeEstoque.subtrair(dadosCadastroPedido.convertToPedido().getProdutos());
 
+        //TODO: APos gerar pedido mesmo sem QRCODE, teremos q gravar o pedido, pq quando tivermos o qrcode, teremos q recuperar o pedido pelo numeroPedido e atualizá-lo
         DadosPedido dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosCadastroPedido.convertToPedido()));
 
+        // TODO: mensagem solicitando novo pagamento, qrCode será recebido via fila
         String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
 
+        //TODO: Listener para receber o qrCode, assim que receber, atualizad o pedido e enviar atualização para o Produçao
         Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCodePagamento);
 
         dadosPedido = new DadosPedido(pedido);
 
+        // TODO: Essa criaçao de pedido será feita antes
         criacaoDePedido.criar(dadosPedido);
 
         return ResponseEntity.ok().body(dadosPedido);
