@@ -62,7 +62,7 @@ public class PedidoController {
 
         //dadosPedido = new DadosPedido(pedido);
 
-        //criacaoDePedido.criar(dadosPedido);
+        criacaoDePedido.criar(dadosPedido);
 
         return ResponseEntity.ok().body(dadosPedido);
     }
