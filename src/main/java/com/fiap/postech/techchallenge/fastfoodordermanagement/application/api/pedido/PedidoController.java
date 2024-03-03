@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/pedido")
 @Tag(name = "Pedidos", description = "Rest api para operações de pedidos")
@@ -50,7 +52,9 @@ public class PedidoController {
     public ResponseEntity<DadosPedido> cadastrarPedido(
             @Valid @RequestBody DadosCadastroPedido dadosCadastroPedido) {
 
-        registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
+        if(Objects.nonNull(dadosCadastroPedido.cliente())) {
+            registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
+        }
 
         subtracaoDeEstoqueMessageService.subtrairEstoque(dadosCadastroPedido.convertToPedido().getProdutos());
 
