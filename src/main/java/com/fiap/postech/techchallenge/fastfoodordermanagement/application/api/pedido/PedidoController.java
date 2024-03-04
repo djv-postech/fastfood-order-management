@@ -2,13 +2,10 @@ package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.p
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.SolicitacaoDePagamentoMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.GerarNumeroDoPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/pedido")
@@ -30,18 +29,15 @@ public class PedidoController {
 
     private final SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService;
 
-    private final AtualizacaoDePedido atualizacaoDePedido;
-
-    private final GerarQrCode gerarQrCode;
+    private final SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService;
 
     private final GerarNumeroDoPedido gerarNumeroDoPedido;
 
-    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService, AtualizacaoDePedido atualizacaoDePedido, GerarQrCode gerarQrCode, GerarNumeroDoPedido gerarNumeroDoPedido) {
+    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService, SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService, GerarNumeroDoPedido gerarNumeroDoPedido) {
         this.registroDeCliente = registroDeCliente;
         this.criacaoDePedido = criacaoDePedido;
         this.subtracaoDeEstoqueMessageService = subtracaoDeEstoqueMessageService;
-        this.atualizacaoDePedido = atualizacaoDePedido;
-        this.gerarQrCode = gerarQrCode;
+        this.solicitacaoDePagamentoMessageService = solicitacaoDePagamentoMessageService;
         this.gerarNumeroDoPedido = gerarNumeroDoPedido;
     }
 
@@ -50,19 +46,15 @@ public class PedidoController {
     public ResponseEntity<DadosPedido> cadastrarPedido(
             @Valid @RequestBody DadosCadastroPedido dadosCadastroPedido) {
 
-        registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
+        if (Objects.nonNull(dadosCadastroPedido.cliente())) {
+            registroDeCliente.registrar(dadosCadastroPedido.cliente().convertToCliente());
+        }
 
         subtracaoDeEstoqueMessageService.subtrairEstoque(dadosCadastroPedido.convertToPedido().getProdutos());
 
         DadosPedido dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosCadastroPedido.convertToPedido()));
 
-        //String qrCodePagamento = gerarQrCode.gerar(dadosPedido);
-
-        //Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCodePagamento);
-
-        //dadosPedido = new DadosPedido(pedido);
-
-        criacaoDePedido.criar(dadosPedido);
+        solicitacaoDePagamentoMessageService.solicitacaoDePagamento(dadosPedido.convertToPedido());
 
         return ResponseEntity.ok().body(dadosPedido);
     }

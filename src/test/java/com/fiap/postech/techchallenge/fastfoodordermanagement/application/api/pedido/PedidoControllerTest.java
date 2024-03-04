@@ -9,6 +9,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecas
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.GerarQrCode;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.SolicitacaoDePagamentoMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.GerarNumeroDoPedido;
@@ -48,11 +49,14 @@ public class PedidoControllerTest {
     @Mock
     private GerarNumeroDoPedido gerarNumeroDoPedido;
 
+    @Mock
+    private SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService;
+
     private MockMvc mockMvc;
 
     @BeforeEach
     public void init() {
-        PedidoController pedidoController = new PedidoController(registroDeCliente, criacaoDePedido, subtracaoDeEstoque, atualizacaoDePedido, gerarQrCode, gerarNumeroDoPedido);
+        PedidoController pedidoController = new PedidoController(registroDeCliente, criacaoDePedido, subtracaoDeEstoque, solicitacaoDePagamentoMessageService, gerarNumeroDoPedido);
         this.mockMvc = MockMvcBuilders.standaloneSetup(pedidoController).build();
     }
 
