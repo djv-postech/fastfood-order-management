@@ -21,6 +21,9 @@ public class ProducaoAMQPConfiguration {
     public static final String PRODUTO_ESTOQUE_DLX = "dlx.produto_estoque";
     public static final String PRODUTO_ESTOQUE_SUBTRACAO_DLQ = "dlq.produto_estoque_subtracao";
 
+    public static final String STATUS_PAGAMENTO = "queue.status_pagamento";
+    public static final String SOLICITACAO_PAGAMENTO_QUEUE = "queue.solicitacao_pagamento";
+
 
     @Bean
     public RabbitAdmin criarAdminConfig(ConnectionFactory connectionFactory){

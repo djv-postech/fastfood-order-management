@@ -1,7 +1,9 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pagamento.Pagamento;
@@ -24,8 +26,7 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
 
                           @JsonInclude(NON_NULL) DadosCliente cliente, DadosPagamento pagamento, StatusPedido status,
 
-                          @NotNull @JsonSerialize(using = LocalDateTimeSerializer.class) LocalDateTime dataCriacaoPedido,
-
+                          @NotNull @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonDeserialize(using = LocalDateTimeDeserializer.class)  LocalDateTime dataCriacaoPedido,
                           @NotNull BigDecimal valorTotal,
 
                           @JsonInclude(NON_NULL) String qrCode) {
@@ -35,7 +36,7 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
     }
 
     public Pedido convertToPedido() {
-        return new Pedido(numeroPedido, new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
+        return new Pedido(numeroPedido, isNull(cliente)? null : new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
             isNull(pagamento) ? null : new Pagamento(
                     pagamento.dataPagamento(),
                     pagamento.statusPagamento(),
