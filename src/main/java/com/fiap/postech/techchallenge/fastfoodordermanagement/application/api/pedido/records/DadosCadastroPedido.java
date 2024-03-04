@@ -30,9 +30,12 @@ public record DadosCadastroPedido(List<DadosProduto> produtos,
 
 
     public Pedido convertToPedido() {
-        return new Pedido(null, new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
-                null,
-                status, dataCriacaoPedido);
+        if (cliente != null) {
+            return new Pedido(null, new Cliente(cliente.nome(), new CPF(cliente.cpf()), new Email(cliente.email())), buildProdutos(produtos), valorTotal,
+                    null, status, dataCriacaoPedido);
+        }
+
+        return new Pedido(null, buildProdutos(produtos), valorTotal, null, status, dataCriacaoPedido);
     }
 
     private List<Produto> buildProdutos(List<DadosProduto> cadastroProdutos) {

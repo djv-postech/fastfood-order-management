@@ -13,7 +13,7 @@ public class Pedido {
 
   private String numeroPedido;
 
-  private final Cliente cliente;
+  private Cliente cliente;
   private final List<Produto> produtos;
 
   private final BigDecimal valorTotal;
@@ -61,7 +61,16 @@ public class Pedido {
     this.dataCriacaoPedido = dataCriacaoPedido;
   }
 
-  public String getNumeroPedido() {
+    public Pedido(String numeroPedido, List<Produto> produtos, BigDecimal valorTotal, Pagamento pagamento, StatusPedido status, LocalDateTime dataCriacaoPedido) {
+      this.numeroPedido = numeroPedido;
+      this.produtos = produtos;
+      this.valorTotal = valorTotal;
+      this.pagamento = pagamento;
+      this.statusPedido = status;
+      this.dataCriacaoPedido = dataCriacaoPedido;
+  }
+
+    public String getNumeroPedido() {
     return numeroPedido;
   }
 
