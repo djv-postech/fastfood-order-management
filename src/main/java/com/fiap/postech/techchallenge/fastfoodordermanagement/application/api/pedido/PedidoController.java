@@ -25,18 +25,15 @@ public class PedidoController {
 
     private final RegistroDeCliente registroDeCliente;
 
-    private final CriacaoDePedido criacaoDePedido;
-
     private final SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService;
 
     private final SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService;
 
     private final GerarNumeroDoPedido gerarNumeroDoPedido;
 
-    public PedidoController(RegistroDeCliente registroDeCliente, CriacaoDePedido criacaoDePedido, SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService, SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService, GerarNumeroDoPedido gerarNumeroDoPedido) {
+    public PedidoController(RegistroDeCliente registroDeCliente, SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService, SolicitacaoDePagamentoMessageService solicitacaoDePagamentoMessageService, GerarNumeroDoPedido gerarNumeroDoPedido) {
         this.registroDeCliente = registroDeCliente;
-        this.criacaoDePedido = criacaoDePedido;
-        this.subtracaoDeEstoqueMessageService = subtracaoDeEstoqueMessageService;
+       this.subtracaoDeEstoqueMessageService = subtracaoDeEstoqueMessageService;
         this.solicitacaoDePagamentoMessageService = solicitacaoDePagamentoMessageService;
         this.gerarNumeroDoPedido = gerarNumeroDoPedido;
     }

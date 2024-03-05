@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.PedidoHelper;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCadastroPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoque;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
@@ -35,10 +36,7 @@ public class PedidoControllerTest {
     private RegistroDeCliente registroDeCliente;
 
     @Mock
-    private CriacaoDePedido criacaoDePedido;
-
-    @Mock
-    private SubtracaoDeEstoqueMessageService subtracaoDeEstoque;
+    private SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService;
 
     @Mock
     private AtualizacaoDePedido atualizacaoDePedido;
@@ -56,7 +54,7 @@ public class PedidoControllerTest {
 
     @BeforeEach
     public void init() {
-        PedidoController pedidoController = new PedidoController(registroDeCliente, criacaoDePedido, subtracaoDeEstoque, solicitacaoDePagamentoMessageService, gerarNumeroDoPedido);
+        PedidoController pedidoController = new PedidoController(registroDeCliente, subtracaoDeEstoqueMessageService, solicitacaoDePagamentoMessageService, gerarNumeroDoPedido);
         this.mockMvc = MockMvcBuilders.standaloneSetup(pedidoController).build();
     }
 
@@ -64,12 +62,9 @@ public class PedidoControllerTest {
     @Test
     public void deveRegistrarClienteSubtrairEstoqueGerarQrCodeEEnviarPedidoParaProducao() throws Exception {
         // Dado
-        String qrCode = "qrCode";
         DadosPedido dadosPedido = PedidoHelper.gerarDadosPedido();
         DadosCadastroPedido dadosCadastroPedido = PedidoHelper.gerarDadosCadastroPedido();
         when(gerarNumeroDoPedido.gerar(any())).thenReturn(dadosPedido.convertToPedido());
-        when(gerarQrCode.gerar(any())).thenReturn(qrCode);
-        when(atualizacaoDePedido.atualizarPedido(any(), any())).thenReturn(dadosPedido.convertToPedido());
 
         // Quando
         mockMvc.perform(post("/pedido")
@@ -78,8 +73,10 @@ public class PedidoControllerTest {
                 .andExpect(status().isOk());
 
         // Entao
-        verify(criacaoDePedido, times(1))
-                .criar(any(DadosPedido.class));
+        verify(solicitacaoDePagamentoMessageService, times(1))
+                .solicitacaoDePagamento(any(Pedido.class));
+        verify(subtracaoDeEstoqueMessageService, times(1))
+                .subtrairEstoque(any());
 
     }
 
