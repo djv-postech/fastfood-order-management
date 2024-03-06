@@ -27,12 +27,10 @@ public class ClienteRespositoryImplTest {
 
     private ClienteRespositoryImpl clienteRespository;
 
-    private ClienteConverter converter;
 
     @BeforeEach
     public void init() {
-        converter = new ClienteConverter();
-        clienteRespository = new ClienteRespositoryImpl(clienteRepositoryMysql, converter);
+        clienteRespository = new ClienteRespositoryImpl(clienteRepositoryMysql);
         MockMvcBuilders.standaloneSetup(clienteRespository).build();
     }
 

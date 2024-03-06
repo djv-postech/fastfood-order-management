@@ -16,7 +16,7 @@ public class SolicitacaoDePagamentoMessageService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void solicitacaoDePagamento(Pedido pedido) {
+    public void solicitarPagamento(Pedido pedido) {
         DadosPedido dadosPedido = new DadosPedido(pedido);
         rabbitTemplate.convertAndSend(SOLICITACAO_PAGAMENTO_QUEUE, "", dadosPedido);
         log.info("Solicitação de pagamento enviada. Payload: {}", dadosPedido);

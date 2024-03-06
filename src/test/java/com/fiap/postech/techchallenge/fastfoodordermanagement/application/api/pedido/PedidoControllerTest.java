@@ -72,7 +72,7 @@ public class PedidoControllerTest {
 
         // Entao
         verify(solicitacaoDePagamentoMessageService, times(1))
-                .solicitacaoDePagamento(any(Pedido.class));
+                .solicitarPagamento(any(Pedido.class));
         verify(subtracaoDeEstoqueMessageService, times(1))
                 .subtrairEstoque(any());
 

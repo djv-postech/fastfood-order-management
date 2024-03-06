@@ -5,7 +5,6 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pe
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.RegistroDeCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.estoque.SubtracaoDeEstoqueMessageService;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pagamento.SolicitacaoDePagamentoMessageService;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.GerarNumeroDoPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,7 +50,7 @@ public class PedidoController {
 
         DadosPedido dadosPedido = new DadosPedido(gerarNumeroDoPedido.gerar(dadosCadastroPedido.convertToPedido()));
 
-        solicitacaoDePagamentoMessageService.solicitacaoDePagamento(dadosPedido.convertToPedido());
+        solicitacaoDePagamentoMessageService.solicitarPagamento(dadosPedido.convertToPedido());
 
         return ResponseEntity.ok().body(dadosPedido);
     }

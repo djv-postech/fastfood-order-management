@@ -7,7 +7,6 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.converter.ClienteConverter;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.webjars.NotFoundException;
 
@@ -15,14 +14,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.fiap.postech.techchallenge.fastfoodordermanagement.infra.ClienteEncoder.*;
+import static com.fiap.postech.techchallenge.fastfoodordermanagement.infra.ClienteEncoder.criptografar;
+import static com.fiap.postech.techchallenge.fastfoodordermanagement.infra.ClienteEncoder.encode;
 
 @RequiredArgsConstructor
 @Component
 public class ClienteRespositoryImpl implements ClienteRepository {
 
     private final ClienteRepositoryMysql clienteRepositoryMysql;
-    private final ClienteConverter clienteConverter;
 
     @Override
     public void cadastrarCliente(Cliente cliente) {
@@ -38,7 +37,7 @@ public class ClienteRespositoryImpl implements ClienteRepository {
 
         return clienteEntity
                 .map(ClienteEncoder::decode)
-                .map(clienteConverter::from)
+                .map(ClienteConverter::from)
                 .orElseThrow(() -> new NotFoundException(
                         "Cliente de CPF: " + cpf + " não encontrado"));
     }
@@ -47,7 +46,7 @@ public class ClienteRespositoryImpl implements ClienteRepository {
     public List<Cliente> listarClientes() {
         return clienteRepositoryMysql.findAll().stream()
             .map(ClienteEncoder::decode)
-            .map(clienteConverter::from)
+            .map(ClienteConverter::from)
             .collect(Collectors.toList());
     }
 
