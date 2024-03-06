@@ -8,7 +8,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entiti
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class AtualizacaoDePedido {
+public class AtualizacaoDadosDePagamentoPedido {
 
     public Pedido atualizarPedido(Pedido pedido, String qrCode){
 

@@ -1,7 +1,7 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.amqp;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDePedido;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDadosDePagamentoPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 public class QrCodeListener {
     public static final String QR_CODE_QUEUE = "queue.qr_code";
 
-    private final AtualizacaoDePedido atualizacaoDePedido;
+    private final AtualizacaoDadosDePagamentoPedido atualizacaoDadosDePagamentoPedido;
 
     private final CriacaoDePedido criacaoDePedido;
 
-    public QrCodeListener(AtualizacaoDePedido atualizacaoDePedido, CriacaoDePedido criacaoDePedido) {
-        this.atualizacaoDePedido = atualizacaoDePedido;
+    public QrCodeListener(AtualizacaoDadosDePagamentoPedido atualizacaoDadosDePagamentoPedido, CriacaoDePedido criacaoDePedido) {
+        this.atualizacaoDadosDePagamentoPedido = atualizacaoDadosDePagamentoPedido;
         this.criacaoDePedido = criacaoDePedido;
     }
 
@@ -27,7 +27,7 @@ public class QrCodeListener {
 
         log.info("QR Code recebido! Payload: {}", dadosPedido);
 
-        atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
+        atualizacaoDadosDePagamentoPedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
 
         criacaoDePedido.criar(dadosPedido);
     }

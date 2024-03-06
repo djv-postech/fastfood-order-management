@@ -14,11 +14,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(MockitoExtension.class)
 public class AtualizacaoDePedidoTest {
 
-    private AtualizacaoDePedido atualizacaoDePedido;
+    private AtualizacaoDadosDePagamentoPedido atualizacaoDePedido;
 
     @BeforeEach
     public void init() {
-        atualizacaoDePedido = new AtualizacaoDePedido();
+        atualizacaoDePedido = new AtualizacaoDadosDePagamentoPedido();
         MockMvcBuilders.standaloneSetup(atualizacaoDePedido).build();
     }
 

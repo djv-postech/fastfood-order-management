@@ -1,8 +1,5 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra;
 
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.CPF;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.vo.Email;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
 
 import javax.crypto.Cipher;
