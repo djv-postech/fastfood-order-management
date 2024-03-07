@@ -17,7 +17,7 @@ import java.util.List;
 public class PedidoHelper {
 
     public static DadosPedido gerarDadosPedido() {
-        return new DadosPedido(new Pedido(null, new Cliente("Cliente", new CPF("123.456.789-01"), new Email("email@email.com")), List.of(ProdutoHelper.gerarProduto()), BigDecimal.valueOf(10), PagamentoHelper.gerarPagamento(), StatusPedido.RECEBIDO, null, LocalDateTime.now()));
+        return new DadosPedido(new Pedido(null, new Cliente("9PccfqK9cc2ibXCkkzh2bFqbgK9CWQEAXT2LkZfYlXaiNzosd991nZbd/5bPHk9R", new CPF("123.456.789-01"), new Email("email@email.com")), List.of(ProdutoHelper.gerarProduto()), BigDecimal.valueOf(10), PagamentoHelper.gerarPagamento(), StatusPedido.RECEBIDO, null, LocalDateTime.now()));
     }
 
     public static DadosCadastroPedido gerarDadosCadastroPedido() {

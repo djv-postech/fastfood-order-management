@@ -1,12 +1,16 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.infra;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.infra.persistence.repository.entity.ClienteEntity;
+import lombok.NoArgsConstructor;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public final class ClienteEncoder {
 
     private static final String CHAVE = "tech-challenge-k";

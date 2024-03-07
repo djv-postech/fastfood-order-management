@@ -1,7 +1,6 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.cliente;
 
-import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.cliente.records.DadosCadastroCliente;
-import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.cliente.records.DadosCliente;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosCliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.cliente.Cliente;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.cliente.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,9 +37,9 @@ public class ClienteController {
   @Operation(summary = "Cadastrar novo cliente")
   @PostMapping
   public ResponseEntity<DadosCliente> cadastrar(
-          @Valid @RequestBody DadosCadastroCliente dadosCadastroCliente) {
+          @Valid @RequestBody DadosCliente dadosCliente) {
 
-    cadastroDeCliente.cadastrar(dadosCadastroCliente.convertToCliente());
+    cadastroDeCliente.cadastrar(dadosCliente.convertToCliente());
 
     return ResponseEntity.ok().build();
   }
