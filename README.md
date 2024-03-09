@@ -15,7 +15,6 @@ Serviço responsável pelo gerenciamento de pedidos do sistema fastfood:
 #### **Pedido**
 - Cadastro de novos pedidos
 
-
 Exemplo Payload :
 ```javascript
 {
