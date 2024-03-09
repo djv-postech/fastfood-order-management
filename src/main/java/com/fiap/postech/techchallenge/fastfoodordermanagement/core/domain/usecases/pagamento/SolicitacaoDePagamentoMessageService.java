@@ -5,7 +5,7 @@ import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entiti
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-import static com.fiap.postech.techchallenge.fastfoodordermanagement.infra.config.amqp.ProducaoAMQPConfiguration.SOLICITACAO_PAGAMENTO_QUEUE;
+import static com.fiap.postech.techchallenge.fastfoodordermanagement.infra.config.amqp.ProducaoAMQPConfiguration.SOLICITACAO_PAGAMENTO_EX;
 
 @Slf4j
 public class SolicitacaoDePagamentoMessageService {
@@ -18,7 +18,7 @@ public class SolicitacaoDePagamentoMessageService {
 
     public void solicitarPagamento(Pedido pedido) {
         DadosPedido dadosPedido = new DadosPedido(pedido);
-        rabbitTemplate.convertAndSend(SOLICITACAO_PAGAMENTO_QUEUE, "", dadosPedido);
+        rabbitTemplate.convertAndSend(SOLICITACAO_PAGAMENTO_EX, "", dadosPedido);
         log.info("Solicitação de pagamento enviada. Payload: {}", dadosPedido);
     }
 }
