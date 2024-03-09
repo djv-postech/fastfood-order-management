@@ -13,8 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class QrCodeListenerTest {
@@ -38,6 +37,7 @@ public class QrCodeListenerTest {
     public void aoReceberQrCodeDeveAtualizarDadosDePagamentoEEnviarCriacaoDePedido() throws Exception {
         // Dado
         DadosPedido dadosPedido = PedidoHelper.gerarDadosPedido();
+        when(atualizacaoDadosDePagamentoPedido.atualizarPedido(any(), any())).thenReturn(dadosPedido.convertToPedido());
 
         // Quando
         qrCodeListener.cadastrarPedido(dadosPedido);
