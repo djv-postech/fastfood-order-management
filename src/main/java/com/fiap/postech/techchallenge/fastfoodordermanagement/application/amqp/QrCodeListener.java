@@ -1,6 +1,7 @@
 package com.fiap.postech.techchallenge.fastfoodordermanagement.application.amqp;
 
 import com.fiap.postech.techchallenge.fastfoodordermanagement.application.api.pedido.records.DadosPedido;
+import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.entities.pedido.Pedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.AtualizacaoDadosDePagamentoPedido;
 import com.fiap.postech.techchallenge.fastfoodordermanagement.core.domain.usecases.pedido.CriacaoDePedido;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,9 @@ public class QrCodeListener {
 
         log.info("QR Code recebido! Payload: {}", dadosPedido);
 
-        atualizacaoDadosDePagamentoPedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
+        Pedido pedido = atualizacaoDadosDePagamentoPedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
 
-        criacaoDePedido.criar(dadosPedido);
+        criacaoDePedido.criar(new DadosPedido(pedido));
     }
 
 }

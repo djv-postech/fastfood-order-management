@@ -15,7 +15,6 @@ public class AtualizacaoDadosDePagamentoPedido {
         Pagamento pagamento = new Pagamento(UUID.randomUUID().toString(), pedido.getValorTotal(), TipoPagamento.QRCODE, LocalDateTime.now(), StatusPagamento.PROCESSANDO);
         pedido.setQrCode(qrCode);
         pedido.setPagamento(pagamento);
-
         return pedido;
     }
 }
