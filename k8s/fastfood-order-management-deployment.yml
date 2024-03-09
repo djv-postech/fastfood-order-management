@@ -80,7 +80,23 @@ spec:
                 secretKeyRef:
                   name: fastfood-order-management-secret-opaque
                   key: DISCOVERY_SERVER
+            - name: RABBIT_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-opaque
+                  key: RABBIT_HOST
 
+            - name: RABBIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-opaque
+                  key: RABBIT_USERNAME
+
+            - name: RABBIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fastfood-order-management-opaque
+                  key: RABBIT_PASSWORD
 #            - name: MYSQL_DB
 #              valueFrom:
 #                secretKeyRef:
