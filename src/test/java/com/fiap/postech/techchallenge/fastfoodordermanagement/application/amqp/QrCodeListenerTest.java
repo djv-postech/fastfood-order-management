@@ -37,7 +37,7 @@ public class QrCodeListenerTest {
     public void aoReceberQrCodeDeveAtualizarDadosDePagamentoEEnviarCriacaoDePedido() throws Exception {
         // Dado
         DadosPedido dadosPedido = PedidoHelper.gerarDadosPedido();
-        when(atualizacaoDadosDePagamentoPedido.atualizarPedido(any(), any())).thenReturn(dadosPedido.convertToPedido());
+        when(atualizacaoDadosDePagamentoPedido.atualizarPedido(any())).thenReturn(dadosPedido.convertToPedido());
 
         // Quando
         qrCodeListener.cadastrarPedido(dadosPedido);

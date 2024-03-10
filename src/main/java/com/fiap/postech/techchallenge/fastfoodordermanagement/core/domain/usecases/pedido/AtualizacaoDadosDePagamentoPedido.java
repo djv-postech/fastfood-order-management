@@ -11,10 +11,9 @@ import java.util.UUID;
 
 public class AtualizacaoDadosDePagamentoPedido {
 
-    public Pedido atualizarPedido(Pedido pedido, String qrCode){
+    public Pedido atualizarPedido(Pedido pedido){
 
         Pagamento pagamento = new Pagamento(UUID.randomUUID().toString(), pedido.getValorTotal(), TipoPagamento.QRCODE, LocalDateTime.now(), StatusPagamento.PROCESSANDO);
-        pedido.setQrCode(qrCode);
         pedido.setPagamento(pagamento);
         pedido.setStatusPedido(StatusPedido.RECEBIDO);
         return pedido;

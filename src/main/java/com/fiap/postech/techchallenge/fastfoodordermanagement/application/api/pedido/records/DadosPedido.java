@@ -42,7 +42,7 @@ public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<Dados
                     pagamento.statusPagamento(),
                     pagamento.tipoPagamento(),
                     pagamento.totalPagamento()),
-                 status, dataCriacaoPedido);
+                 status, qrCode,dataCriacaoPedido);
     }
 
     private List<Produto> buildProdutos(List<DadosProduto> cadastroProdutos) {

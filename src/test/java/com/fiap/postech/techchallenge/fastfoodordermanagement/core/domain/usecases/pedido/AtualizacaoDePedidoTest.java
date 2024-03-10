@@ -30,7 +30,7 @@ public class AtualizacaoDePedidoTest {
         String qrCode = "qrCode";
 
         // Quando
-        Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
+        Pedido pedido = atualizacaoDePedido.atualizarPedido(dadosPedido.convertToPedido());
 
         // Entao
         Assertions.assertNotNull(pedido);

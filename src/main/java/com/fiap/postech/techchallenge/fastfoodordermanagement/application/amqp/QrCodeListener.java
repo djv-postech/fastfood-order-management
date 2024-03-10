@@ -24,11 +24,10 @@ public class QrCodeListener {
 
     @RabbitListener(queues = QR_CODE_QUEUE)
     public void cadastrarPedido(DadosPedido dadosPedido){
-        String qrCode = dadosPedido.convertToPedido().getQrCode();
 
         log.info("QR Code recebido! Payload: {}", dadosPedido);
 
-        Pedido pedido = atualizacaoDadosDePagamentoPedido.atualizarPedido(dadosPedido.convertToPedido(), qrCode);
+        Pedido pedido = atualizacaoDadosDePagamentoPedido.atualizarPedido(dadosPedido.convertToPedido());
 
         criacaoDePedido.criar(new DadosPedido(pedido));
     }

@@ -36,11 +36,6 @@ public class PedidoControllerTest {
     @Mock
     private SubtracaoDeEstoqueMessageService subtracaoDeEstoqueMessageService;
 
-    @Mock
-    private AtualizacaoDadosDePagamentoPedido atualizacaoDePedido;
-
-    @Mock
-    private GerarQrCode gerarQrCode;
 
     @Mock
     private GerarNumeroDoPedido gerarNumeroDoPedido;
