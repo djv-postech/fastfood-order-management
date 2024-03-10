@@ -110,6 +110,10 @@ public class Pedido {
     this.qrCode = qrCode;
   }
 
+  public void setStatusPedido(StatusPedido statusPedido) {
+    this.statusPedido = statusPedido;
+  }
+
   public void setNumeroPedido(String numeroPedido) {
     this.numeroPedido = numeroPedido;
   }
