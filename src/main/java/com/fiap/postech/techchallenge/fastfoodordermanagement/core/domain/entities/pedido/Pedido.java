@@ -110,8 +110,8 @@ public class Pedido {
     this.statusPedido = statusPedido;
   }
 
+
   public void setNumeroPedido(String numeroPedido) {
     this.numeroPedido = numeroPedido;
   }
-
 }
