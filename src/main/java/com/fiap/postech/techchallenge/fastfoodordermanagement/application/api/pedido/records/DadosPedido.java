@@ -24,7 +24,7 @@ import static java.util.Objects.isNull;
 
 public record DadosPedido(@JsonInclude(NON_NULL) String numeroPedido, List<DadosProduto> produtos,
 
-                          @JsonInclude(NON_NULL) DadosCliente cliente, DadosPagamento pagamento, StatusPedido status,
+                          @JsonInclude(NON_NULL) DadosCliente cliente, @JsonInclude(NON_NULL) DadosPagamento pagamento, StatusPedido status,
 
                           @NotNull @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonDeserialize(using = LocalDateTimeDeserializer.class)  LocalDateTime dataCriacaoPedido,
                           @NotNull BigDecimal valorTotal,
